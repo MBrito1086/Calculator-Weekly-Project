@@ -1,19 +1,13 @@
 const numbers = document.getElementsByClassName('nums')
 const ops = document.getElementsByClassName('op')
-const clear = document.getElementsByClassName('buttons')
-const equals = document.getElementsByClassName('equals')
+const clear = document.querySelector('.clearbutton')
+const equals = document.querySelector('.equals')
 const displayBox = document.querySelector('p')
 
-// numbers.addEventListener("click", clicks())
-// ops.addEventListener("click", clicks())
-// clear.addEventListener("click", clicks())
-
-
-// function () {
-//     document.getElementsByTagName("p").innerHTML = "";
-// }
-
-// let displays = ""
+let operator = ""
+let firstNumber = 0
+let secondNumber = 0
+results = 0
 
 for (let i = 0; i < numbers.length; i++) {
   numbers[i].addEventListener("click", function click() {
@@ -23,19 +17,29 @@ for (let i = 0; i < numbers.length; i++) {
 
 for (let i = 0; i < ops.length; i++) {
   ops[i].addEventListener("click", function click() {
-     displayBox.innerHTML += ops[i].textContent
+    operator = ops[i].textContent
+    firstNumber = parseFloat(displayBox.textContent)
+    displayBox.textContent = ""
   })
 }
 
-for (let i = 0; i < clear.length; i++) {
-  clear[i].addEventListener('click', function click() {
-  displayBox.innerHTML = ''
+clear.addEventListener('click', function click() {
+  displayBox.innerHTML = ""
 })
-}
 
-for (var i = 0; i < equals.length; i++) {
-  // let total = displayBox.parseInt
-  equals[i].addEventListener('click', function equal(){
-  displayBox.innerHTML += total
+equals.addEventListener('click', function equal(){
+    secondNumber = parseFloat(displayBox.textContent)
+    displayBox.innerHTML = ""
+    if (operator === "+") {
+      results = firstNumber + secondNumber
+    } else if (operator === "-") {
+      results = firstNumber - secondNumber
+    } else if (operator === "*") {
+      results = firstNumber * secondNumber
+    } else if (operator === "/") {
+      results = firstNumber / secondNumber
+    } else {
+      displayBox.innerHTML = "Error"
+    }
+    displayBox.innerHTML = results
 })
-}
